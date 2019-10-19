@@ -22,11 +22,15 @@ def create_app():
 
     @app.route('/admin')
     @login_required
-    def admin_index():
+    def admin():
         if current_user.is_admin:
             return 'Привет админ.'
         else:
             return 'Ты не админ'
+
+    @app.route('/index')
+    def index():
+        return 'Здесь строится личный кабинет юзера.'
 
     @app.route('/process-login', methods=['POST'])
     def process_login():
@@ -36,15 +40,19 @@ def create_app():
             if user and user.check_password(form.password.data):
                 login_user(user)
                 flash('Вы вошли на сайт')
-                return redirect(url_for('index'))
+                if user.is_admin:
+                    return redirect(url_for('admin'))
+                else:
+                    return redirect(url_for('index'))
 
         flash('Неправильное имя пользователя или пароль')
         return redirect(url_for('login'))
 
+
     @app.route('/logout')
     def logout():
         logout_user()
-        return redirect(url_for('index'))
+        return redirect(url_for('login'))
 
     @login_manager.user_loader
     def load_user(user_id):

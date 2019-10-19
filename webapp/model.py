@@ -10,11 +10,8 @@ class User(db.Model, UserMixin):
         id = db.Column(db.Integer, primary_key=True)
         login = db.Column(db.String(50), unique=True, nullable=False)
         password = db.Column(db.String(100), nullable=False)
+        is_admin = db.Column(db.Boolean, nullable=False, default=False)
         persons = db.relationship("Person", backref="user")
-
-        @property
-        def is_admin(self):
-            return self.role == 'admin'
 
         def set_password(self, password):
             self.password = generate_password_hash(password)
