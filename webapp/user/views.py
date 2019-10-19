@@ -15,9 +15,9 @@ def process_login():
             login_user(user, remember=form.remember_me.data)
             # flash('Вы вошли на сайт')
             if user.is_admin:
-                return redirect(url_for('admin'))
+                return redirect(url_for('admin.admin'))
             else:
-                return redirect(url_for('index'))
+                return redirect(url_for('index.index'))
 
     flash('Неправильное имя пользователя или пароль')
     return redirect(url_for('user.login'))
