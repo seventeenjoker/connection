@@ -3,6 +3,7 @@ from flask_login import LoginManager, current_user, login_required
 from webapp.user.models import db, User, Person, PythagoreanSquare
 from webapp.user.models import User
 from webapp.user.views import blueprint as user_blueprint
+from webapp.user.forms import LoginForm
 
 def create_app():
     app = Flask(__name__)
