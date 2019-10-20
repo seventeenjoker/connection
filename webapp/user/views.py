@@ -25,7 +25,7 @@ def process_login():
 @blueprint.route('/')
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('index'))
+        return redirect(url_for('index.index'))
     title = 'Авторизация'
     login_form = LoginForm()
     return render_template('login.html', page_title=title, form=login_form)
