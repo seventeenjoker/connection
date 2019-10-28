@@ -6,7 +6,4 @@ blueprint = Blueprint('admin', __name__, url_prefix='/admin')
 @blueprint.route('/')
 @login_required
 def admin():
-    if current_user.is_admin:
-        return 'Привет админ.'
-    else:
-        return 'Ты не админ'
+    return 'Привет админ!' if current_user.is_admin else 'Ты не админ!'
