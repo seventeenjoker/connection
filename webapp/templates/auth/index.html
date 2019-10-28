@@ -12,11 +12,8 @@
         </div>
         {% endif %}
       {% endwith %}
-        <form action="{{ url_for('index.index') }}" method="post">
-          <div class=form-group>
-              {{ form.username.label }}<br>
-              {{ form.username() }}
-          </div>
+        <form action="{{ url_for('main.main') }}" method="post">
+          <h1>Здесь будет Личный кабинет!</h1>
         </form>
     </div>
   </div>

@@ -14,5 +14,5 @@ class RegistrationForm(FlaskForm):
     password2 = PasswordField('Повторите пароль', validators=[DataRequired(), EqualTo('password')], render_kw={"class":"form-control"})
     submit = SubmitField('Отправить', render_kw={"class":"btn btn-primary"})
 
-class IndexForm(FlaskForm):
+class MainForm(FlaskForm):
         username = StringField('Имя пользователя', validators=[DataRequired()], render_kw={"class":"form-control"})
