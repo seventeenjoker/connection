@@ -1,9 +1,8 @@
-from flask_sqlalchemy import SQLAlchemy #ForeignKey #, Table, Column, Integer
-from sqlalchemy.orm import relationship
 from flask_login import UserMixin
+from sqlalchemy.orm import relationship
 from werkzeug.security import generate_password_hash, check_password_hash
 
-db = SQLAlchemy()
+from webapp.db import db
 
 class User(db.Model, UserMixin):
         __tablename__ = 'user'
