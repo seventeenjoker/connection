@@ -23,62 +23,51 @@
             </p>
             <footer class="blockquote-footer">Льюис Кэрролл. <cite title="Source Title">Алиса в Зазеркалье</cite></footer>
           </blockquote>
-          <div class="accordion" id="accordionExample">
-            <div class="card">
 
-              <div class="card-header" id="headingOne">
-                <h5 class="mb-0">
-                  <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    Добавить расчет квадрата
-                  </button>
-                </h5>
-              </div>
+          <p>
+            <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+              Добавить расчет квадрата
+            </a>
+          </p>
+          <div class="collapse" id="collapseExample">
+            <div class="card card-body">
+              <form class="needs-validation" novalidate>
 
-              <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-                <div class="card-body">
+                <div class="form-row">
 
-                  <form class="needs-validation" novalidate>
+                  {{ form.hidden_tag() }}
 
-                    <div class="form-row">
+                  <div class=form-group class="col-md-2 mb-4" for="validationTooltip01">
+                      {{ form.firstname.label }}<br>
+                      {{ form.firstname() }}
+                  </div>
 
-                      <div class="col-md-3 mb-4">
-                        <label for="validationTooltip01">Имя</label>
-                        <input type="text" class="form-control" id="validationTooltip01" placeholder="Имя" value="Анна" required>
-                        <div class="valid-tooltip">
-                          Looks good!
-                        </div>
-                      </div>
-
-                      <div class="col-md-3 mb-4">
-                        <label for="validationTooltip02">Фамилия</label>
-                        <input type="text" class="form-control" id="validationTooltip02" placeholder="Фамилия" value="Петрова" required>
-                        <div class="valid-tooltip">
-                          Looks good!
-                        </div>
-                      </div>
-
-                      <div class="col-md-3 mb-4">
-                        <label for="validationTooltip01">Дата рождения</label>
-                          <input type="date" class="form-control" id="start" name="trip-start" value="1994-06-17" min="1900-01-01" max="2100-12-31" required>
-                      </div>
-
-                      <div class="col-md-3 mb-4">
-                        <label for="validationTooltip01">Время рождения</label>
-                          <input type="time" class="form-control" id="appt" name="appt" min="00:00" max="23:59" required>
-                      </div>
-
-                    </div>
-
-                    <button class="btn btn-primary" type="submit">Добавить расчет</button>
-
-                  </form>
+                  <div class=form-group class="col-md-2 mb-4" for="validationTooltip01">
+                      {{ form.lastname.label }}<br>
+                      {{ form.lastname() }}
+                  </div>
                   
+                  <div class=form-group class="col-md-2 mb-4" for="validationTooltip01">
+                      {{ form.middlename.label }}<br>
+                      {{ form.middlename() }}
+                  </div>
+
+                  <div class=form-group class="col-md-3 mb-4">
+                      {{ form.datebirth.label }}<br>
+                      {{ form.datebirth() }}
+                  </div>
+
+                  <div class=form-group class="col-md-3 mb-4">
+                      {{ form.timebirth.label }}<br>
+                      {{ form.timebirth() }}
+                  </div>
+                  <div class=form-group class="col-md-3 mb-4 btn btn-primary">
+                    <p>{{ form.submit }}</p>
+                  </div>
                 </div>
+              </form>  
               </div>
-
-            </div>
           </div>
-
         </form>
 
     </div>
