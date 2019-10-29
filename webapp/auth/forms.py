@@ -15,4 +15,4 @@ class RegistrationForm(FlaskForm):
     submit = SubmitField('Отправить', render_kw={"class":"btn btn-primary"})
 
 class MainForm(FlaskForm):
-        username = StringField('Имя пользователя', validators=[DataRequired()], render_kw={"class":"form-control"})
+        pass
