@@ -31,9 +31,9 @@ def process_add_person():
             db.session.commit()
             # Добавляем расчет в таблицу PythagoreanSquare
             person_square = pythagore_calc(date_time_form)
-            new_square = PythagoreanSquare(person_id=current_user.id, first=person_square['1'], second=person_square['2'], \
-                third=person_square['3'], fourth=person_square['4'], fifth=person_square['5'], sixth=person_square['6'], \
-                seventh=person_square['7'], eighth=person_square['8'], ninth=person_square['9'])
+            new_square = PythagoreanSquare(person_id=current_user.id, first=person_square.get('1', 0), second=person_square.get('2', 0), \
+                third=person_square.get('3', 0), fourth=person_square.get('4', 0), fifth=person_square.get('5', 0), sixth=person_square.get('6', 0), \
+                seventh=person_square.get('7', 0), eighth=person_square.get('8', 0), ninth=person_square.get('9', 0))
             db.session.add(new_square)
             db.session.commit()
             flash('Вы успешно добавили пользователя!')
