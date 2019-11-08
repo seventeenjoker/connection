@@ -39,17 +39,6 @@ def process_add_user():
 
 # расчет квадрата
 def pythagore_calc(date_time_birth):
-    square_calc = {
-        '1': 0,
-        '2': 0,
-        '3': 0,
-        '4': 0,
-        '5': 0,
-        '6': 0,
-        '7': 0,
-        '8': 0,
-        '9': 0,
-    }
     day = date_time_birth.year
     month = date_time_birth.month
     year = date_time_birth.year
