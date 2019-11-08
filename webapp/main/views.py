@@ -51,18 +51,18 @@ def pythagore_calc(date_time_birth):
     # Рассчитайте сумму двух первых, получившихся в результате расчёта, чисел: 8+20 = 28. Это первое рабочее число.
     
     summ1 = sum(map(lambda x: int(x), "".join(day, month))
-    summ2 = sum(map(lambda x: int(x), year)
+    summ2 = sum(map(lambda x: int(x), year))
 
     first_work = summ1 + summ2
 
     # 2. Далее найдите сумму цифр первого рабочего числа: 2+8 = 10. Это второе рабочее число.
-    second_work = sum(map(lambda x: int(x), first_work)
+    second_work = sum(map(lambda x: int(x), first_work))
 
     # 3. Из первого рабочего числа вычитайте умноженную вдвое первую цифру даты рождения: 28-2*1 = 26. Это третье рабочее число.
-    third_work = first_work - int(str(day)[:1])
+    third_work = first_work - int(str(day)[:1]*2)
 
     # 4. И, наконец, сложите цифры третьего рабочего числа: 2+6=8. В итоге получаем четвёртое рабочее число.
-    fourth_work = sum(map(lambda x: int(x), third_work)
+    fourth_work = sum(map(lambda x: int(x), third_work))
 
     # Joining with empty separator
     numbers = "".join([day, month,year,first_work, second_work, third_work, fourth_work])
