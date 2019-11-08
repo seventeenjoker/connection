@@ -1,10 +1,11 @@
-import datetime
 import time
 from collections import Counter
-from flask import Blueprint, render_template
+from datetime import datetime
+from flask import Blueprint, render_template, redirect, url_for
 from flask_login import current_user, login_required
 from webapp.main.forms import MainForm
 from webapp.auth.models import Person, PythagoreanSquare, User
+from webapp.db import db
 
 blueprint = Blueprint('main', __name__, url_prefix='/main')
 
@@ -20,7 +21,7 @@ def process_add_person():
     form = MainForm()
     if form.validate_on_submit():
         # Т.к. на форме дата и время разные поля, надо положить их в одну переменную для корректного применения фильтра
-        date_time_form = " ".join(form.datebirth.data, form.timebirth.data)
+        date_time_form = datetime.strptime(str(form.datebirth.data) + " " + str(form.timebirth.data), '%Y-%m-%d %H:%M:%S')
         person = Person.query.filter_by(last_name=form.lastname.data, first_name=form.firstname.data, \
             datetime_of_birth=date_time_form, user_id=current_user.id).first()
         if not person:
@@ -37,9 +38,9 @@ def process_add_person():
             db.session.add(new_square)
             db.session.commit()
             flash('Вы успешно добавили пользователя!')
-            return redirect(url_for('/'))
-    flash('Исправьте пожалуйста ошибки при добавлении нового пользователя. Возможно он уже существует.')
-    return redirect(url_for('/'))
+            return redirect(url_for('main.main'))
+    # flash('Исправьте пожалуйста ошибки при добавлении нового пользователя. Возможно он уже существует.')
+    return redirect(url_for('main.main'))
 
 """ расчет квадрата """
 def pythagore_calc(date_time_birth):
@@ -50,19 +51,19 @@ def pythagore_calc(date_time_birth):
     # Точно также высчитайте сумму цифр года рождения: 1+9+9+1 = 20. Получили второе число.
     # Рассчитайте сумму двух первых, получившихся в результате расчёта, чисел: 8+20 = 28. Это первое рабочее число.
     
-    summ1 = sum(map(lambda x: int(x), "".join(day, month)))
-    summ2 = sum(map(lambda x: int(x), year))
+    summ1 = sum(map(lambda x: int, list(str(day)) + list(str(month))))
+    summ2 = sum(map(lambda x: int, list(year)))
 
     first_work = summ1 + summ2
 
     # 2. Далее найдите сумму цифр первого рабочего числа: 2+8 = 10. Это второе рабочее число.
-    second_work = sum(map(lambda x: int(x), first_work))
+    second_work = sum(map(lambda x: int, list(first_work)))
 
     # 3. Из первого рабочего числа вычитайте умноженную вдвое первую цифру даты рождения: 28-2*1 = 26. Это третье рабочее число.
     third_work = first_work - int(str(day)[:1]*2)
 
     # 4. И, наконец, сложите цифры третьего рабочего числа: 2+6=8. В итоге получаем четвёртое рабочее число.
-    fourth_work = sum(map(lambda x: int(x), third_work))
+    fourth_work = sum(map(lambda x: int, list(third_work)))
 
     # Joining with empty separator
     numbers = "".join([day, month,year,first_work, second_work, third_work, fourth_work])
