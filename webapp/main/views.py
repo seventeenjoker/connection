@@ -50,7 +50,7 @@ def pythagore_calc(date_time_birth):
     # Точно также высчитайте сумму цифр года рождения: 1+9+9+1 = 20. Получили второе число.
     # Рассчитайте сумму двух первых, получившихся в результате расчёта, чисел: 8+20 = 28. Это первое рабочее число.
     
-    summ1 = sum(map(lambda x: int(x), "".join(day, month))
+    summ1 = sum(map(lambda x: int(x), "".join(day, month)))
     summ2 = sum(map(lambda x: int(x), year))
 
     first_work = summ1 + summ2
