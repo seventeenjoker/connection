@@ -4,7 +4,7 @@ from collections import Counter
 from flask import Blueprint, render_template
 from flask_login import current_user, login_required
 from webapp.main.forms import MainForm
-from webapp.auth.models import Person, User
+from webapp.auth.models import Person, PythagoreanSquare, User
 
 blueprint = Blueprint('main', __name__, url_prefix='/main')
 
@@ -31,7 +31,11 @@ def process_add_person():
             db.session.commit()
             # Добавляем расчет в таблицу PythagoreanSquare
             person_square = pythagore_calc(date_time_form)
-
+            new_square = PythagoreanSquare(person_id=current_user.id, first=person_square['1'], second=person_square['2'], \
+                third=person_square['3'], fourth=person_square['4'], fifth=person_square['5'], sixth=person_square['6'], \
+                seventh=person_square['7'], eighth=person_square['8'], ninth=person_square['9'])
+            db.session.add(new_square)
+            db.session.commit()
             flash('Вы успешно добавили пользователя!')
             return redirect(url_for('/'))
     flash('Исправьте пожалуйста ошибки при добавлении нового пользователя. Возможно он уже существует.')
