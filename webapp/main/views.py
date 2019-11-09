@@ -42,8 +42,8 @@ def process_add_person():
     # flash('Исправьте пожалуйста ошибки при добавлении нового пользователя. Возможно он уже существует.')
     return redirect(url_for('main.main'))
 
-""" расчет квадрата """
 def pythagore_calc(date_time_birth):
+    """ расчет квадрата """
     day = date_time_birth.year
     month = date_time_birth.month
     year = date_time_birth.year
