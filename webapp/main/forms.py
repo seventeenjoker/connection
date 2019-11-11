@@ -9,6 +9,3 @@ class MainForm(FlaskForm):
         datebirth = DateField('Дата', validators=[DataRequired()], render_kw={"class":"form-control", "type":"date", "min":"1900-01-01", "max":"2100-12-31"})
         timebirth = TimeField('Время', validators=[DataRequired()], render_kw={"class":"form-control", "type":"time", "class":"form-control", "min":"00:00", "max":"23:59"})
         submit = SubmitField('Добавить расчет', render_kw={"class":"btn btn-primary"})
-
-class PeopleForm(FlaskForm):
-        pass

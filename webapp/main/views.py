@@ -12,9 +12,12 @@ blueprint = Blueprint('main', __name__, url_prefix='/main')
 @blueprint.route('/')
 @login_required
 def main():
+    persons_list = Person.query.filter_by(user_id=current_user.id).all()
+    # print(f'current_user.id = {current_user.id}')
+    print(persons_list)
     title = 'Добро пожаловать в личный кабинет.'
     main_form = MainForm()
-    return render_template('auth/index.html', page_title=title, form=main_form)
+    return render_template('auth/index.html', page_title=title, form=main_form, persons_list=persons_list)
 
 @blueprint.route('/', methods=['POST'])
 def process_add_person():

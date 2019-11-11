@@ -32,7 +32,7 @@ class Person(db.Model):
         pythagorean_square = relationship("PythagoreanSquare", uselist=False, backref="person")
 
         def __repr__(self):
-            pass
+            return f'<id {self.id}>'
 
 class PythagoreanSquare(db.Model):
         __tablename__ = 'pythagorean_square'
