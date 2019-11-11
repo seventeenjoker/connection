@@ -13,8 +13,6 @@ blueprint = Blueprint('main', __name__, url_prefix='/main')
 @login_required
 def main():
     persons_list = Person.query.filter_by(user_id=current_user.id).all()
-    # print(f'current_user.id = {current_user.id}')
-    print(persons_list)
     title = 'Добро пожаловать в личный кабинет.'
     main_form = MainForm()
     return render_template('auth/index.html', page_title=title, form=main_form, persons_list=persons_list)
@@ -35,7 +33,7 @@ def process_add_person():
             db.session.commit()
             # Добавляем расчет в таблицу PythagoreanSquare
             person_square = pythagore_calc(date_time_form)
-            new_square = PythagoreanSquare(person_id=new_person.user_id, first=person_square.get('1', 0), second=person_square.get('2', 0), \
+            new_square = PythagoreanSquare(person_id=new_person.id, first=person_square.get('1', 0), second=person_square.get('2', 0), \
                 third=person_square.get('3', 0), fourth=person_square.get('4', 0), fifth=person_square.get('5', 0), sixth=person_square.get('6', 0), \
                 seventh=person_square.get('7', 0), eighth=person_square.get('8', 0), ninth=person_square.get('9', 0))
             db.session.add(new_square)
@@ -47,14 +45,14 @@ def process_add_person():
 
 def pythagore_calc(date_time_birth):
     """ расчет квадрата """
-    day = date_time_birth.year
+    day = date_time_birth.day
     month = date_time_birth.month
     year = date_time_birth.year
     # 1. Выпишите цифры дня и месяца рождения: 1610. Сложите цифры, получится первое число: 1+6+1+0 = 8.
     # Точно также высчитайте сумму цифр года рождения: 1+9+9+1 = 20. Получили второе число.
     # Рассчитайте сумму двух первых, получившихся в результате расчёта, чисел: 8+20 = 28. Это первое рабочее число.
     
-    summ1 = sum(map(lambda x: int(x), list(str(day)) + list(str(month))))
+    summ1 = sum(map(lambda x: int(x), (list(str(day)) + list(str(month)))))
     summ2 = sum(map(lambda x: int(x), list(str(year))))
 
     first_work = summ1 + summ2
@@ -63,7 +61,7 @@ def pythagore_calc(date_time_birth):
     second_work = sum(map(lambda x: int(x), list(str(first_work))))
 
     # 3. Из первого рабочего числа вычитайте умноженную вдвое первую цифру даты рождения: 28-2*1 = 26. Это третье рабочее число.
-    third_work = first_work - int(str(day)[:1]*2)
+    third_work = first_work - int(int(str(day)[:1])*2)
 
     # 4. И, наконец, сложите цифры третьего рабочего числа: 2+6=8. В итоге получаем четвёртое рабочее число.
     fourth_work = sum(map(lambda x: int(x), list(str(third_work))))
