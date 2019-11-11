@@ -13,9 +13,10 @@ blueprint = Blueprint('main', __name__, url_prefix='/main')
 @login_required
 def main():
     persons_list = Person.query.filter_by(user_id=current_user.id).all()
+    squares_list = PythagoreanSquare.query.all()
     title = 'Добро пожаловать в личный кабинет.'
     main_form = MainForm()
-    return render_template('auth/index.html', page_title=title, form=main_form, persons_list=persons_list)
+    return render_template('auth/index.html', page_title=title, form=main_form, persons_list=persons_list, squares_list=squares_list)
 
 @blueprint.route('/', methods=['POST'])
 def process_add_person():

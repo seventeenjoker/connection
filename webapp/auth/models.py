@@ -19,7 +19,7 @@ class User(db.Model, UserMixin):
             return check_password_hash(self.password, password)
 
         def __repr__(self):
-            return f'<User id {self.id}>'
+            return f'{self.login}'
 
 class Person(db.Model):
         __tablename__ = 'person'
@@ -49,4 +49,4 @@ class PythagoreanSquare(db.Model):
         ninth = db.Column(db.Integer)
         
         def __repr__(self):
-            pass
+            return f'<id {self.id}>'

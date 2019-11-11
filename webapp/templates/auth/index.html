@@ -26,25 +26,37 @@
           {% if persons_list %}
                   <table class="table table-sm">
                       <thead>
-                        <tr>
+                        <tr class="text-center">
                           <th scope="col">#</th>
                           <th scope="col">Имя</th>
                           <th scope="col">Фамилия</th>
                           <th scope="col">Отчество</th>
                           <th scope="col">Дата и время</th>
                           <th scope="col">Матрица</th>
+                          <th scope="col">Отметить как главную</th>
                         </tr>
                       </thead>
-                      <tbody>
+                      <tbody class="text-center">
                         {% for person in persons_list %}
-                          <tr>
-                            <th scope="row">{{ loop.index }}</th>
-                            <td>{{ person.first_name }}</td>
-                            <td>{{ person.last_name }}</td>
-                            <td>{{ person.middle_name }}</td>
-                            <td>{{ person.datetime_of_birth }}</td>
-                            <td>matrix_link</td>
-                          </tr>
+                          {% for square in squares_list %}
+                            {% if person.id == square.person_id %}
+                            <tr>
+                              <th scope="row">{{ loop.index }}</th>
+                              <td>{{ person.first_name }}</td>
+                              <td>{{ person.last_name }}</td>
+                              <td>{{ person.middle_name }}</td>
+                              <td>{{ person.datetime_of_birth }}</td>
+                              <td>{{ square.first }}, {{ square.second }}, {{ square.third }}, {{ square.fourth }},
+                                {{ square.fifth }}, {{ square.sixth }}, {{ square.seventh }}, {{ square.eighth }}, {{ square.ninth }}
+                                <a class="nav-link active" href="#">Active</a></td>
+                              <td>
+                                <div class="form-check">
+                                <input lass="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+                                </div>
+                              </td>
+                            </tr>
+                            {% endif %}
+                          {% endfor %}
                         {% endfor %}
                       </tbody>
                     </table>
